@@ -19,7 +19,8 @@ class UsersTableSeeder extends Seeder
         User::create([
             'name'=> 'Administrador',
             'email'=> 'admin@prueba.com',
-            'password'=> $password,]);
+            'password'=> $password,
+            ]);
         // Generar algunos usuarios para nuestra aplicacion
         for($i = 0; $i < 10; $i++) {
             User::create([

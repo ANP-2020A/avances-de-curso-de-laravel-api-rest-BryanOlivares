@@ -2,22 +2,22 @@
 
 use App\Article;
 use Illuminate\Database\Seeder;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ArticlesTableSeeder extends Seeder
 {
 
     public function run()
     {
-        //Vaciar la tabla.
+        // Vaciar la tabla.
         Article::truncate();
-
         $faker = \Faker\Factory::create();
         // Crear artículos ficticios en la tabla
-        for($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             Article::create([
-                'title'=> $faker->sentence,
-                'body'=> $faker->paragraph,
-                ]);
+                'title' => $faker->sentence,
+                'body' => $faker->paragraph,
+            ]);
         }
     }
 }

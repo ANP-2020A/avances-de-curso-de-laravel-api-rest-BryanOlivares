@@ -29,6 +29,5 @@ class AddUserIdColumnArticle extends Migration
         Schema::table('articles', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
         });
-
     }
 }

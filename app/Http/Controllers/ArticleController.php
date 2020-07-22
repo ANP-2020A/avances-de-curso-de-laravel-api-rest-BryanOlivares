@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
+use App\Http\Resources\Article as ArticleResources;
+use App\Http\Resources\Article as ArticleCollection;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
     public function index()
     {
-        return Article::all();
+        return new ArticleCollection(Article::paginate(25));
     }
     public function show(Article $article)
     {
-        return $article;
+        return  response()->json(new ArticleResources($article),200);
     }
     public function store(Request $request)
     {

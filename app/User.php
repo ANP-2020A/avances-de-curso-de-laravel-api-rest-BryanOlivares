@@ -57,6 +57,6 @@ class   User extends Authenticatable  implements JWTSubject
     {
         return $this->belongsToMany('App\Category')->as('subscriptions')->withTimestamps();
     }
-
+21-resources
 
 }

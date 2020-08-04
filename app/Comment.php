@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Auth;
 class Comment extends Model
 {
     protected $fillable = ['text'];
+
+
+
+class Comment extends Model
+{
+    protected $fillable = ['text'];
+ 21-resources
     public static function boot()
     {
         parent::boot();
@@ -15,6 +22,8 @@ class Comment extends Model
             $comment->user_id = Auth::id();
         });
     }
+ 21-resources
+
     public function user()
     {
         return $this->belongsTo('App\User');

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 class Article extends Model
 {
     protected $fillable = ['title', 'body'];
+
+ 21-resources
     public static function boot()
     {
         parent::boot();
@@ -15,6 +17,7 @@ class Article extends Model
             $article->user_id = Auth::id();
         });
     }
+
     public function comments()
     {
         return $this->hasMany('App\Comment');
@@ -23,5 +26,14 @@ class Article extends Model
     {
         return $this->belongsTo('App\User');
     }
+21-resources
 
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

@@ -9,9 +9,17 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+    private static $rules = [
+         'title' => 'required|string|unique:articles|max:255',
+         'body' => 'required',
+    ];
+    private static $messege = [
+        'required' => 'El campo :attribute es obligatorio.',
+        'body.required' => 'El body no es válido.',
+    ];
     public function index()
     {
-        return new ArticleCollection(Article::paginate(25));
+        return new ArticleCollection(Article::paginate(10));
     }
     public function show(Article $article)
     {
@@ -19,6 +27,16 @@ class ArticleController extends Controller
     }
     public function store(Request $request)
     {
+        $request->validate(self::$rules, self::$messege);
+        /*$messages = [
+            'required' => 'El campo :attribute es obligatorio.',
+            'body.required' => 'El body no es válido.',
+        ];
+        $request->validate([
+            'title' => 'required|string|unique:articles|max:255',
+            'body' => 'required',
+        ],$messages);
+        */
         $article = Article::create($request->all());
         return response()->json($article, 201);
     }

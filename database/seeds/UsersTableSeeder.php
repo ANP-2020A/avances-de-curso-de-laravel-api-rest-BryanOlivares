@@ -2,7 +2,7 @@
 
 use App\Category;
 use App\User;
-use App\Category;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -27,9 +27,6 @@ class UsersTableSeeder extends Seeder
         for($i = 0; $i < 10; $i++) {
 
             $user= User::create([
-
-            $user = User::create([
-21-resources
                 'name'=> $faker->name,
                 'email'=> $faker->email,
                 'password'=> $password,

@@ -4,9 +4,8 @@
 use Illuminate\Database\Seeder;
 use App\Category;
 
-use App\Category;
-use Illuminate\Database\Seeder;
- 21-resources
+
+
 
 class CategoriesTableSeeder extends Seeder
 {
@@ -27,4 +26,4 @@ class CategoriesTableSeeder extends Seeder
         }
     }
 }
- 21-resources
+

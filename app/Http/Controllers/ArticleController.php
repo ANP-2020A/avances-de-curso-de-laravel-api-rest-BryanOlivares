@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Article;
-use App\Http\Resources\Article as ArticleResources;
+use App\Http\Resources\Article as ArticleResource;
 use App\Http\Resources\Article as ArticleCollection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -20,18 +21,29 @@ class ArticleController extends Controller
     }
     public function show(Article $article)
     {
-        return  response()->json(new ArticleResources($article),200);
+        return  response()->json(new ArticleResource($article),200);
+    }
+    public function image(Article $article)
+    {
+        return response()->download(public_path(Storage::url($article->image)), $article->title);
     }
     public function store(Request $request)
     {
         $request->validate( [
             'title' => 'required|string|unique:articles|max:255',
             'body' => 'required',
-            'category_id'=> 'required|exists:categories, id'
+            'category_id'=> 'required|exists:categories, id',
+            'image' => 'required|image|dimensions:min_width=200,min_height=200',
         ], self::$messege);
 
-        $article = Article::create($request->all());
-        return response()->json($article, 201);
+       // $article = Article::create($request->all());
+        $article = new Article($request->all());
+        $path = $request->image->store('public/articles');
+        //$path = $request->image->storeAs('public/articles', $request->user()->id . '_' . $article->title . '.' . $request->image->extension());
+
+        $article->image = $path;
+        $article->save();
+        return response()->json(new ArticleResource($article), 201);
     }
     public function update(Request $request, Article $article)
     {
